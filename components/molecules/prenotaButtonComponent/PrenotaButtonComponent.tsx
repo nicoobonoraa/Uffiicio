@@ -1,13 +1,21 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import {Text, TouchableOpacity, View, Switch, Pressable} from 'react-native'
+import { useSelector } from "react-redux";
+import { IRootState } from "../../../redux/store/store";
 
 
 const PrenotaButtonComponent = (props : any) => {
     
-    const { isPrenotaClicked, pageToNavigate } = props
+    const { pageToNavigate } = props
+    const [enabled, setEnabled] = useState(false)
 
+    const isPrenotaClicked = useSelector((state: IRootState) => state.peopleReducer.isPrenotato)
     const navigation : NavigationProp<any, any> = useNavigation();
+
+    const toggleSwitch = () => {
+        setEnabled(!enabled)
+    }
 
     return (
         <View>
@@ -27,7 +35,10 @@ const PrenotaButtonComponent = (props : any) => {
             <View>
                 <View>
                     <Text>Non sono in ufficio</Text>
-                    <Switch disabled={false}/>
+                    <Switch
+                        onValueChange={toggleSwitch}
+                        value={enabled}
+                    />
                 </View>
                 <View>
                     <Text>X Disdici</Text>

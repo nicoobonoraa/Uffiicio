@@ -30,7 +30,7 @@ const Dashboard = () => {
             </View>
 
             {/* Button */}
-            <PrenotaButtonComponent isPrenotaClicked={false} pageToNavigate={"PrenotazioneScreen"}></PrenotaButtonComponent>
+            <PrenotaButtonComponent pageToNavigate={"PrenotazioneScreen"}></PrenotaButtonComponent>
 
         </View>
     )
