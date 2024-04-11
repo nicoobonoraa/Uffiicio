@@ -5,6 +5,7 @@ import StanzaComponent from "../../components/molecules/stanzaComponent/StanzaCo
 import { useSelector } from "react-redux";
 import { PeopleState } from "../../redux/reducers/reducers";
 import { IRootState } from "../../redux/store/store";
+import PrenotaButtonComponent from "../../components/molecules/prenotaButtonComponent/PrenotaButtonComponent";
 
 const Dashboard = () => {
 
@@ -28,7 +29,9 @@ const Dashboard = () => {
                 <StanzaComponent stanzaId={4}></StanzaComponent>
             </View>
 
-            
+            {/* Button */}
+            <PrenotaButtonComponent isPrenotaClicked={false} pageToNavigate={"PrenotazioneScreen"}></PrenotaButtonComponent>
+
         </View>
     )
 }

@@ -3,6 +3,7 @@ import {
     Text,
     View
 } from 'react-native'
+import PrenotazioneScreen from "../Prenotazione/PrenotazioneScreen";
 
 const Stack = createNativeStackNavigator()
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -15,6 +16,7 @@ const Main = () => {
         headerShown: false
       }}>
         <Stack.Screen name="Dashboard" component={Dashboard}/>
+        <Stack.Screen name="PrenotazioneScreen" component={PrenotazioneScreen}/>
     </Stack.Navigator>
     )
 }

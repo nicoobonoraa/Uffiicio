@@ -1,30 +1,37 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
-import {Text, TouchableOpacity, View, Switch} from 'react-native'
-import { AntDesign, MaterialIcons  } from '@expo/vector-icons';
+import {Text, TouchableOpacity, View, Switch, Pressable} from 'react-native'
+
 
 const PrenotaButtonComponent = (props : any) => {
     
-    const { isPrenotaClicked } = props
+    const { isPrenotaClicked, pageToNavigate } = props
+
+    const navigation : NavigationProp<any, any> = useNavigation();
 
     return (
         <View>
 
             {!isPrenotaClicked && 
-            <View>
-                <TouchableOpacity>Prenotati</TouchableOpacity>
-                <AntDesign name="plus" size={24} color="black" />
-            </View>
+                <Pressable
+                onPress={(pressed) => {
+                    console.log("pressed")
+                    pageToNavigate && navigation.navigate(pageToNavigate)
+                }}>
+                    <Text>Prenotati</Text>
+                    <Text>+</Text>
+                </Pressable>
             }
             
             {isPrenotaClicked && 
             <View>
                 <View>
                     <Text>Non sono in ufficio</Text>
-                    <Switch></Switch>
+                    <Switch disabled={false}/>
                 </View>
                 <View>
-                    <MaterialIcons name="cancel" size={24} color="black" />
-                </View>
+                    <Text>X Disdici</Text>
+                  </View>
             </View>
             }
         </View>
