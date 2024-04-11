@@ -25,6 +25,7 @@ export const addPersonAction = (state: PeopleState) => {
     if (!state.isPrenotato) {
         console.log(state.peopleList)
         setIsPrenotatoAction(state)
+        state.nPeople++
         person.oraArrivo = new Date(person.oraArrivo).toISOString()
         person.oraUscita = new Date(person.oraArrivo).toISOString()
         state.peopleList.push(person)
