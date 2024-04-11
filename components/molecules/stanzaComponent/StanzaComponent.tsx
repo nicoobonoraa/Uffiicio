@@ -3,7 +3,7 @@ import {Text, View} from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from "../../../redux/store/store";
 import ProfileImageComponent from "../../atoms/profileimg/ProfileImageComponent";
-import { PeopleState } from "../../../redux/reducers/reducers";
+import { PeopleState, setSelectedRoom } from "../../../redux/reducers/reducers";
 // import PrenotaButtonComponent from "../prenotaButtonComponent/prenotaButtonComponent";
 import PrenotaButtonComponent from "../prenotaButtonComponent/PrenotaButtonComponent";
 import { TouchableOpacity } from "react-native";
@@ -11,12 +11,16 @@ import {v4 as uuidv4} from 'uuid'
 
 const StanzaComponent = (props : any) => {
 
-    const { stanzaId } = props 
+    const { stanzaId, stanzaNome } = props 
     // const people = peopleReducer
     const people = useSelector((state: IRootState) => state.peopleReducer.peopleList)
+    const dispatch = useDispatch()
 
     return (
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress = {() => {
+            dispatch(setSelectedRoom(stanzaId))
+        }}>
             <View>
                 <Text>
                     {

@@ -4,26 +4,32 @@ import StanzaComponent from '../../components/molecules/stanzaComponent/StanzaCo
 import DateTimePicker, { DateTimePickerAndroid, DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import PrenotaButtonComponent from '../../components/molecules/prenotaButtonComponent/PrenotaButtonComponent';
 import ConfermaPrenotazioneButton from '../../components/atoms/confermaPrenotazioneButton/ConfermaPrenotazioneButton';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../../redux/store/store';
 
 const PrenotazioneScreen = () => {
 
-const [dateIn, setDateIn] = useState(new Date(1598051730000));
-const [dateOut, setDateOut] = useState(new Date(1598051730000));
-const [showIn, setShowIn] = useState(false)
-const [showOut, setShowOut] = useState(false)
 
-const onChangeIn = (event : DateTimePickerEvent, selectedDate : Date | null | any | undefined) => {
-    console.log("changed")
-    const currentDate = selectedDate;
-    setDateIn(currentDate);
-    setShowIn(false)
-};
-const onChangeOut = (event : DateTimePickerEvent, selectedDate : Date | null | any | undefined) => {
-    console.log("changed")
-    const currentDate = selectedDate;
-    setDateOut(currentDate);
-    setShowOut(false)
-};
+
+    const [dateIn, setDateIn] = useState(new Date(1598051730000));
+    const [dateOut, setDateOut] = useState(new Date(1598051730000));
+    const [showIn, setShowIn] = useState(false)
+    const [showOut, setShowOut] = useState(false)
+
+    const selectedStanza = useSelector((state: IRootState) => state.peopleReducer.selectedRoom)
+
+    const onChangeIn = (event : DateTimePickerEvent, selectedDate : Date | null | any | undefined) => {
+        console.log("changed")
+        const currentDate = selectedDate;
+        setDateIn(currentDate);
+        setShowIn(false)
+    };
+    const onChangeOut = (event : DateTimePickerEvent, selectedDate : Date | null | any | undefined) => {
+        console.log("changed")
+        const currentDate = selectedDate;
+        setDateOut(currentDate);
+        setShowOut(false)
+    };
 
     return (
         <View>
@@ -76,7 +82,7 @@ const onChangeOut = (event : DateTimePickerEvent, selectedDate : Date | null | a
             </Pressable>
         
             {/* Button */}
-            <ConfermaPrenotazioneButton></ConfermaPrenotazioneButton>
+            <ConfermaPrenotazioneButton selectedStanza={selectedStanza} oraIn={dateIn} oraOut={dateOut}></ConfermaPrenotazioneButton>
         </View>
     )
 }

@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import defaultPeople from "../../data/defaultPeople";
-import { ADD_PERSON, addPersonAction, setIsPrenotatoAction, setSelectedRoomAction } from "../actions/actions";
+// import { ADD_PERSON, addPersonAction, createMeAction, setIsPrenotatoAction, setSelectedRoomAction } from "../actions/actions";
 import Person from "../../types/person";
+import { me } from "../../data/me";
+import { createMeAction, setIsPrenotatoAction, setSelectedRoomAction } from "../actions/actions";
 
 const nPeople = 0
 
@@ -10,10 +12,12 @@ export interface PeopleState {
     peopleList: Person[],
     nPeople: number,
     selectedRoom?: number,
-    isPrenotato: boolean
+    isPrenotato: boolean,
+    self: Person
 }
 
 const initialState: PeopleState = {
+    self: me,
     peopleList: defaultPeople.map(person => ({
         ...person,
         oraArrivo: new Date(person.oraArrivo).toISOString(),
@@ -28,13 +32,12 @@ const peopleSlice = createSlice({
     name: "people",
     initialState,
     reducers: {
-        addPersonAction,
         setIsPrenotatoAction,
-
-        setSelectedRoomAction,
+        createMeAction,
+        setSelectedRoomAction
 
     }
 })
 
-export const { addPersonAction: addPerson, setSelectedRoomAction: setSelectedRoom, setIsPrenotatoAction: setIsPrenotato } = peopleSlice.actions
+export const { createMeAction: createMe, setSelectedRoomAction: setSelectedRoom, setIsPrenotatoAction: setIsPrenotato } = peopleSlice.actions
 export default peopleSlice.reducer;
