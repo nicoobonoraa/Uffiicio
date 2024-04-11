@@ -8,10 +8,12 @@ import { PeopleState, setSelectedRoom } from "../../../redux/reducers/reducers";
 import PrenotaButtonComponent from "../prenotaButtonComponent/PrenotaButtonComponent";
 import { TouchableOpacity } from "react-native";
 import {v4 as uuidv4} from 'uuid'
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 const StanzaComponent = (props : any) => {
 
-    const { stanzaId, stanzaNome } = props 
+    const { stanzaId, stanzaNome, shouldNavigate } = props 
+    const navigation : NavigationProp<any, any> = useNavigation();
     // const people = peopleReducer
     const people = useSelector((state: IRootState) => state.peopleReducer.peopleList).filter(person => person.stanza === stanzaId)
     const dispatch = useDispatch()
@@ -20,6 +22,7 @@ const StanzaComponent = (props : any) => {
         <TouchableOpacity
         onPress = {() => {
             dispatch(setSelectedRoom(stanzaId))
+            shouldNavigate && navigation.navigate('StanzaScreen')
         }}>
             <View>
                 <FlatList

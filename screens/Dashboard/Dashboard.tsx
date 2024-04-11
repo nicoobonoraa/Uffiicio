@@ -23,10 +23,10 @@ const Dashboard = () => {
 
             {/* Stanze */}
             <View>
-                <StanzaComponent stanzaId={1}></StanzaComponent>
-                <StanzaComponent stanzaId={2}></StanzaComponent>
-                <StanzaComponent stanzaId={3}></ StanzaComponent>
-                <StanzaComponent stanzaId={4}></StanzaComponent>
+                <StanzaComponent stanzaId={1} shouldNavigate={true}></StanzaComponent>
+                <StanzaComponent stanzaId={2} shouldNavigate={true}></StanzaComponent>
+                <StanzaComponent stanzaId={3} shouldNavigate={true}></ StanzaComponent>
+                <StanzaComponent stanzaId={4} shouldNavigate={true}></StanzaComponent>
             </View>
 
             {/* Button */}
