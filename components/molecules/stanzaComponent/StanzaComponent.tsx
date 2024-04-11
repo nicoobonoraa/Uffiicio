@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from "../../../redux/store/store";
 import ProfileImageComponent from "../../atoms/profileimg/ProfileImageComponent";
 import { PeopleState, setSelectedRoom } from "../../../redux/reducers/reducers";
-// import PrenotaButtonComponent from "../prenotaButtonComponent/prenotaButtonComponent";
-import PrenotaButtonComponent from "../prenotaButtonComponent/PrenotaButtonComponent";
 import { TouchableOpacity } from "react-native";
 import {v4 as uuidv4} from 'uuid'
 import { NavigationProp, useNavigation } from "@react-navigation/native";
@@ -17,7 +15,8 @@ const StanzaComponent = (props : any) => {
     // const people = peopleReducer
     const people = useSelector((state: IRootState) => state.peopleReducer.peopleList).filter(person => person.stanza === stanzaId)
     const dispatch = useDispatch()
-    console.log(stanzaId)
+    // console.log(stanzaId)
+    // console.log(people)
     return (
         <TouchableOpacity
         onPress = {() => {
@@ -27,7 +26,8 @@ const StanzaComponent = (props : any) => {
             <View>
                 <FlatList
                 data={people}
-                renderItem={({item}) => <ProfileImageComponent key={people.indexOf(item)} src={item.profilePic}></ProfileImageComponent>}></FlatList>
+                // extraData={people}
+                renderItem={({item}) => <ProfileImageComponent key={people.indexOf(item)} src={item.profilePic} isInOffice={item.isInOffice}></ProfileImageComponent>}></FlatList>
             </View>
         </TouchableOpacity>
     )

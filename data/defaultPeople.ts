@@ -9,7 +9,8 @@ const defaultPeople: Person[] = [
         stanza: 2,
         get key() {
             return this.key = (this.name + this.oraArrivo + this.oraUscita + this.stanza + Math.random()).toString()
-        }
+        },
+        isInOffice: false
     },
     {
         name: 'Bob',
@@ -19,7 +20,8 @@ const defaultPeople: Person[] = [
         stanza: 3,
         get key() {
             return this.key = (this.name + this.oraArrivo + this.oraUscita + this.stanza).toString()
-        }
+        },
+        isInOffice: true
     },
     {
         name: 'Charlie',
@@ -29,7 +31,8 @@ const defaultPeople: Person[] = [
         stanza: 1,
         get key() {
             return this.key = (this.name + this.oraArrivo + this.oraUscita + this.stanza).toString()
-        }
+        },
+        isInOffice: false
     },
     {
         name: 'Diana',
@@ -39,7 +42,8 @@ const defaultPeople: Person[] = [
         stanza: 4,
         get key() {
             return this.key = (this.name + this.oraArrivo + this.oraUscita + this.stanza).toString()
-        }
+        },
+        isInOffice: true
     },
     {
         name: 'Victor',
@@ -49,7 +53,8 @@ const defaultPeople: Person[] = [
         stanza: 2,
         get key() {
             return this.key = (this.name + this.oraArrivo + this.oraUscita + this.stanza).toString()
-        }
+        },
+        isInOffice: false
     }
 ];
 

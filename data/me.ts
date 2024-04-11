@@ -11,4 +11,5 @@ export const me: Person = {
     get key() {
         return this.key = (this.name + this.oraArrivo + this.oraUscita + this.stanza + Math.random()).toString()
     },
+    isInOffice: false
 }

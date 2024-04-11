@@ -4,5 +4,6 @@ export default interface Person {
     oraArrivo: Date | string,
     oraUscita: Date | string,
     profilePic: string,
-    stanza: number
+    stanza: number,
+    isInOffice: boolean
 }

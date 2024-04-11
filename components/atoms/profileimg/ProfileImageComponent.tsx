@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -7,8 +7,13 @@ import {
 
 const ProfileImageComponent = (props : any) => {
 
-    const {width, height, src} = props
+    const {width, height, src, isInOffice} = props
+    const [isOffice, setIsOffice] = useState(isInOffice)
 
+    useEffect(() => {
+        // console.log("aggiornato")
+        setIsOffice(isInOffice)
+    }, [isInOffice])
 
     return (
         <View>
@@ -18,6 +23,7 @@ const ProfileImageComponent = (props : any) => {
                 }}
                 width={width | 50}
                 height={height | 50}
+                style={[!isOffice ? {opacity: 0.3} : {opacity: 1}, {borderRadius: 50}]}
             ></Image>
         </View>
     )

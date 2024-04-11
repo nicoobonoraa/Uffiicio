@@ -23,7 +23,8 @@ const ConfermaPrenotazioneButton = (props : any) => {
             oraUscita: oraOut.toISOString(),
             key: self.key,
             profilePic: self.profilePic,
-            stanza: selectedStanza
+            stanza: selectedStanza,
+            isInOffice: false
         }))
         // console.log(self)
     };
