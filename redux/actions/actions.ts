@@ -52,6 +52,7 @@ export const setSelectedRoomAction = (state: PeopleState, action: PayloadAction<
 export const removePersonAction = (state: PeopleState) => {
     setIsPrenotatoAction(state)
     state.peopleList.pop()
+    state.nPeople = state.peopleList.length
 }
 
 export const setIsPrenotatoAction = (state: PeopleState) => {
