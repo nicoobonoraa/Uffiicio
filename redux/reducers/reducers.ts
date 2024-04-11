@@ -3,7 +3,7 @@ import defaultPeople from "../../data/defaultPeople";
 // import { ADD_PERSON, addPersonAction, createMeAction, setIsPrenotatoAction, setSelectedRoomAction } from "../actions/actions";
 import Person from "../../types/person";
 import { me } from "../../data/me";
-import { createMeAction, setIsPrenotatoAction, setSelectedRoomAction, toggleIsInOfficeAction } from "../actions/actions";
+import { createMeAction, removePersonAction, setIsPrenotatoAction, setSelectedRoomAction, toggleIsInOfficeAction } from "../actions/actions";
 
 const nPeople = 0
 
@@ -36,10 +36,11 @@ const peopleSlice = createSlice({
         setSelectedRoomAction,
 
         createMeAction,
-        toggleIsInOfficeAction
+        toggleIsInOfficeAction,
+        removePersonAction
 
     }
 })
 
-export const { createMeAction: createMe, setSelectedRoomAction: setSelectedRoom, setIsPrenotatoAction: setIsPrenotato, toggleIsInOfficeAction: toggleIsInOffice } = peopleSlice.actions
+export const { createMeAction: createMe, removePersonAction: removePerson, setSelectedRoomAction: setSelectedRoom, setIsPrenotatoAction: setIsPrenotato, toggleIsInOfficeAction: toggleIsInOffice } = peopleSlice.actions
 export default peopleSlice.reducer;

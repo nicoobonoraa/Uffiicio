@@ -49,6 +49,11 @@ export const setSelectedRoomAction = (state: PeopleState, action: PayloadAction<
     state.selectedRoom = action.payload
 }
 
+export const removePersonAction = (state: PeopleState) => {
+    setIsPrenotatoAction(state)
+    state.peopleList.pop()
+}
+
 export const setIsPrenotatoAction = (state: PeopleState) => {
     state.isPrenotato = !state.isPrenotato
 }

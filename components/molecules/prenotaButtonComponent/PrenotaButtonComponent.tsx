@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {Text, TouchableOpacity, View, Switch, Pressable} from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../../redux/store/store";
-import { toggleIsInOffice } from "../../../redux/reducers/reducers";
+import { removePerson, toggleIsInOffice } from "../../../redux/reducers/reducers";
 
 const PrenotaButtonComponent = (props : any) => {
     
@@ -44,7 +44,13 @@ const PrenotaButtonComponent = (props : any) => {
                     />
                 </View>
                 <View>
-                    <Text>X Disdici</Text>
+                    <Pressable
+                    onPress={()=>{
+                        dispatch(removePerson())
+                    }}>
+
+                        <Text>X Disdici</Text>
+                    </Pressable>
                   </View>
             </View>
             }
