@@ -5,10 +5,13 @@ import { PeopleState } from "../reducers/reducers";
 export const ADD_PERSON = 'ADD_PERSON'
 
 
-export const addPersonAction = (state: PeopleState, person: Person) => {
+export const addPersonAction = (state: PeopleState) => {
 
     console.log(state.isPrenotato)
-    console.log(person)
+    const person = state.self
+
+    console.log(state.peopleList.length)
+    console.log(state.self)
     // if (state.isPrenotato) {
     //     return {
     //         ...state,
@@ -20,11 +23,14 @@ export const addPersonAction = (state: PeopleState, person: Person) => {
     //     }
     // }
     if (!state.isPrenotato) {
+        console.log(state.peopleList)
         setIsPrenotatoAction(state)
         person.oraArrivo = new Date(person.oraArrivo).toISOString()
         person.oraUscita = new Date(person.oraArrivo).toISOString()
         state.peopleList.push(person)
+        console.log(state.peopleList)
     } else {
+        console.log("dentroallelse")
         state.peopleList = state.peopleList
     }
 }
@@ -34,7 +40,7 @@ export const createMeAction = (state: PeopleState, action: PayloadAction<Person>
     state.self.oraUscita = action.payload.oraUscita ? new Date(action.payload.oraUscita).toISOString() : new Date(state.self.oraUscita).toISOString()
     state.self.stanza = action.payload.stanza ? action.payload.stanza : state.self.stanza
 
-    addPersonAction(state, state.self)
+    addPersonAction(state)
 }
 
 export const setSelectedRoomAction = (state: PeopleState, action: PayloadAction<number>) => {

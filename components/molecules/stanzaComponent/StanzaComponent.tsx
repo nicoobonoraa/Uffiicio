@@ -1,5 +1,5 @@
 import React, { useDebugValue, useEffect, useState } from "react";
-import {Text, View} from 'react-native'
+import {FlatList, Text, View} from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { IRootState } from "../../../redux/store/store";
 import ProfileImageComponent from "../../atoms/profileimg/ProfileImageComponent";
@@ -13,21 +13,18 @@ const StanzaComponent = (props : any) => {
 
     const { stanzaId, stanzaNome } = props 
     // const people = peopleReducer
-    const people = useSelector((state: IRootState) => state.peopleReducer.peopleList)
+    const people = useSelector((state: IRootState) => state.peopleReducer.peopleList).filter(person => person.stanza === stanzaId)
     const dispatch = useDispatch()
-
+    console.log(stanzaId)
     return (
         <TouchableOpacity
         onPress = {() => {
             dispatch(setSelectedRoom(stanzaId))
         }}>
             <View>
-                <Text>
-                    {
-                    people.map(person => person.stanza == stanzaId && <ProfileImageComponent key={people.indexOf(person)} src={person.profilePic}></ProfileImageComponent>)
-                    }
-                </Text>
-            
+                <FlatList
+                data={people}
+                renderItem={({item}) => <ProfileImageComponent key={people.indexOf(item)} src={item.profilePic}></ProfileImageComponent>}></FlatList>
             </View>
         </TouchableOpacity>
     )

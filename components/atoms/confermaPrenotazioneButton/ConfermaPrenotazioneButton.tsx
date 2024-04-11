@@ -5,29 +5,24 @@ import Person from "../../../types/person";
 import {  createMe } from "../../../redux/reducers/reducers";
 import { me } from "../../../data/me";
 import { IRootState } from "../../../redux/store/store";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 
 const ConfermaPrenotazioneButton = (props : any) => {
     const {selectedStanza, oraIn, oraOut} = props
     const dispatch = useDispatch()
+    const navigation : NavigationProp<any, any> = useNavigation();
 
     let self = me
     self = useSelector((state: IRootState) => state.peopleReducer.self)
 
-    const handleAddPerson = (person: Person) => {
-        console.log("selectedStanza: " + selectedStanza)
-        person.oraArrivo= oraIn.toISOString(),
-        person.oraUscita= oraOut.toISOString(),
-        person.stanza= selectedStanza
-        // console.log(person.oraArrivo)
-        // console.log(oraIn)
-        // console.log(person)
+    const handleAddPerson = () => {
         dispatch(createMe({
-            name: person.name,
+            name: self.name,
             oraArrivo: oraIn.toISOString(),
             oraUscita: oraOut.toISOString(),
-            key: person.key,
-            profilePic: person.profilePic,
+            key: self.key,
+            profilePic: self.profilePic,
             stanza: selectedStanza
         }))
         // console.log(self)
@@ -36,7 +31,8 @@ const ConfermaPrenotazioneButton = (props : any) => {
     return (
         <TouchableOpacity
         onPress={ () => {
-                handleAddPerson(me)
+                handleAddPerson()
+                navigation.navigate('Dashboard')
             }
         }>
             <Text>Conferma Prenotazione</Text>
