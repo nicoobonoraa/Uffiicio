@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 // import { ADD_PERSON, addPersonAction, createMeAction, setIsPrenotatoAction, setSelectedRoomAction } from "../actions/actions";
 import Person from "../../types/person";
-import { addPrenotazioneAction, setIsPrenotatoAction, setSelectedRoomAction, toggleIsInUfficioAction } from "../actions/actions";
+import { addPrenotazioneAction, deletePrenotazioneAction, setIsPrenotatoAction, setSelectedRoomAction, toggleIsInUfficioAction } from "../actions/actions";
 import { Stanza } from "../../types/Stanza";
 import { Prenotazione } from "../../types/Prenotazione";
 import { defaultPeople } from "../../data/defaultPeople";
 import { defaultStanze } from "../../data/defaultStanze";
 import { defaultPrenotazioni } from "../../data/defaultPrenotazioni";
-import { createPrenotazione } from "../thunks/thunks";
+import { createPrenotazione, deletePrenotazione } from "../thunks/thunks";
 const nPeople = 0
 
 
@@ -34,12 +34,17 @@ const peopleSlice = createSlice({
         addPrenotazioneAction,
         setIsPrenotatoAction,
         setSelectedRoomAction,
-        toggleIsInUfficioAction
+        toggleIsInUfficioAction,
+        deletePrenotazioneAction
     },
     extraReducers: (builder) => {
         builder.addCase(createPrenotazione.pending, (state) => { });
         builder.addCase(createPrenotazione.fulfilled, (state) => { return { ...state } });
         builder.addCase(createPrenotazione.rejected, (state) => { });
+
+        builder.addCase(deletePrenotazione.pending, (state) => { });
+        builder.addCase(deletePrenotazione.fulfilled, (state) => { return { ...state } });
+        builder.addCase(deletePrenotazione.rejected, (state) => { });
     }
 })
 
@@ -48,6 +53,7 @@ export const {
     setIsPrenotatoAction: setIsPrenotato,
     setSelectedRoomAction: setSelectedRoom,
     toggleIsInUfficioAction: toggleIsInUfficio,
+    deletePrenotazioneAction: removePrenotazione,
     ...actions } = peopleSlice.actions
 export default peopleSlice.reducer;
 

@@ -99,3 +99,10 @@ export const toggleIsInUfficioAction = (state: UfficioState) => {
         prenotazioneList: updatedPrenotazioneList
     };
 }
+
+export const deletePrenotazioneAction = (state: UfficioState, action: PayloadAction<number>) => {
+    return {
+        ...state,
+        prenotazioneList: state.prenotazioneList.filter(prenotazione => prenotazione.persona != action.payload)
+    }
+}

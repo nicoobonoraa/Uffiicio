@@ -4,20 +4,22 @@ import {Text, TouchableOpacity, View, Switch, Pressable} from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../../redux/store/store";
 import { toggleIsInUfficio } from "../../../redux/reducers/reducers";
+import { ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { deletePrenotazione } from "../../../redux/thunks/thunks";
 
 const PrenotaButtonComponent = (props : any) => {
     
     const { pageToNavigate } = props
     const [enabled, setEnabled] = useState(false)
 
-    const dispatch = useDispatch()
+    const thunkDispatch = useDispatch<ThunkDispatch<IRootState, any,any>>()
 
     const isPrenotaClicked = useSelector((state: IRootState) => state.peopleReducer.isPrenotazioneEffettuata)
     const navigation : NavigationProp<any, any> = useNavigation();
 
     const toggleSwitch = () => {
         setEnabled(!enabled)
-        dispatch(toggleIsInUfficio())
+        thunkDispatch(toggleIsInUfficio())
     }
 
     return (
@@ -46,7 +48,7 @@ const PrenotaButtonComponent = (props : any) => {
                 <View>
                     <Pressable
                     onPress={()=>{
-                        // dispatch(removePerson())
+                        thunkDispatch(deletePrenotazione(5))
                     }}>
 
                         <Text>X Disdici</Text>
