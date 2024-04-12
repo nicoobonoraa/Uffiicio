@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {Text, TouchableOpacity, View, Switch, Pressable} from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../../redux/store/store";
-import { removePerson, toggleIsInOffice } from "../../../redux/reducers/reducers";
+import { toggleIsInUfficio } from "../../../redux/reducers/reducers";
 
 const PrenotaButtonComponent = (props : any) => {
     
@@ -12,12 +12,12 @@ const PrenotaButtonComponent = (props : any) => {
 
     const dispatch = useDispatch()
 
-    const isPrenotaClicked = useSelector((state: IRootState) => state.peopleReducer.isPrenotato)
+    const isPrenotaClicked = useSelector((state: IRootState) => state.peopleReducer.isPrenotazioneEffettuata)
     const navigation : NavigationProp<any, any> = useNavigation();
 
     const toggleSwitch = () => {
         setEnabled(!enabled)
-        dispatch(toggleIsInOffice(!enabled))
+        dispatch(toggleIsInUfficio())
     }
 
     return (
@@ -46,7 +46,7 @@ const PrenotaButtonComponent = (props : any) => {
                 <View>
                     <Pressable
                     onPress={()=>{
-                        dispatch(removePerson())
+                        // dispatch(removePerson())
                     }}>
 
                         <Text>X Disdici</Text>

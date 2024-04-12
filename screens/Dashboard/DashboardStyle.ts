@@ -21,7 +21,9 @@ export const dashStyles = StyleSheet.create({
         backgroundColor: '#2E2E2E',
         borderRadius: 9,
         padding: 13,
-
+        // display: 'flex',
+        // flexDirection: 'row',
+        // flexWrap: 'wrap'
     },
     innerStanzeContainer: {
         width: '100%',

@@ -7,6 +7,7 @@ import ConfermaPrenotazioneButton from '../../components/atoms/confermaPrenotazi
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../redux/store/store';
 import { FlatList } from 'react-native';
+import { screenStyles } from '../screenStyles/screenStyles';
 
 const PrenotazioneScreen = () => {
 
@@ -33,7 +34,7 @@ const PrenotazioneScreen = () => {
     };
 
     return (
-        <View>
+        <View style={screenStyles.wrapper}>
             <Text>
                 PrenotazioneScreen
             </Text>

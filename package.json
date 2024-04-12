@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "fast-android": "adb reverse tcp:8081 tcp:8081",
+    "fast-android": "start cmd /k adb reverse tcp:8081 tcp:8081 && start cmd /k scrcpy && start cmd /k react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",

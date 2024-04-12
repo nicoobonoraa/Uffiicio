@@ -7,8 +7,10 @@ import {
 
 const ProfileImageComponent = (props : any) => {
 
-    const {width, height, src, isInOffice, isLeftColumn} = props
+    const {width, height, src, isInOffice, isLeftColumn, person} = props
     const [isOffice, setIsOffice] = useState(isInOffice)
+
+    console.log("person Arrived", person)
 
     useEffect(() => {
         // console.log("aggiornato")
@@ -19,11 +21,11 @@ const ProfileImageComponent = (props : any) => {
         <View>
             <Image
                 source={{
-                    uri: src
+                    uri: person.profilePic
                 }}
                 width={width | 50}
                 height={height | 50}
-                style={[!isOffice ? {opacity: 0.3} : {opacity: 1}, {borderRadius: 50}]}
+                style={[!isOffice ? {opacity: 0.3} : {opacity: 1}, {borderRadius: 50, marginRight: 10}]}
             ></Image>
         </View>
     )

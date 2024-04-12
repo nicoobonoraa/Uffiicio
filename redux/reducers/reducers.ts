@@ -1,46 +1,53 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import defaultPeople from "../../data/defaultPeople";
 // import { ADD_PERSON, addPersonAction, createMeAction, setIsPrenotatoAction, setSelectedRoomAction } from "../actions/actions";
 import Person from "../../types/person";
-import { me } from "../../data/me";
-import { createMeAction, removePersonAction, setIsPrenotatoAction, setSelectedRoomAction, toggleIsInOfficeAction } from "../actions/actions";
-
+import { addPrenotazioneAction, setIsPrenotatoAction, setSelectedRoomAction, toggleIsInUfficioAction } from "../actions/actions";
+import { Stanza } from "../../types/Stanza";
+import { Prenotazione } from "../../types/Prenotazione";
+import { defaultPeople } from "../../data/defaultPeople";
+import { defaultStanze } from "../../data/defaultStanze";
+import { defaultPrenotazioni } from "../../data/defaultPrenotazioni";
+import { createPrenotazione } from "../thunks/thunks";
 const nPeople = 0
 
 
-export interface PeopleState {
+export interface UfficioState {
+    stanzeList: Stanza[],
     peopleList: Person[],
-    nPeople: number,
-    selectedRoom?: number,
-    isPrenotato: boolean,
-    self: Person
+    prenotazioneList: Prenotazione[],
+    isPrenotazioneEffettuata: boolean,
+    selectedRoom: number
 }
 
-const initialState: PeopleState = {
-    self: me,
-    peopleList: defaultPeople.map(person => ({
-        ...person,
-        oraArrivo: new Date(person.oraArrivo).toISOString(),
-        oraUscita: new Date(person.oraArrivo).toISOString()
-    })),
-    nPeople: defaultPeople.length,
-    selectedRoom: undefined,
-    isPrenotato: false
+const initialState: UfficioState = {
+    stanzeList: defaultStanze,
+    peopleList: defaultPeople,
+    prenotazioneList: defaultPrenotazioni,
+    isPrenotazioneEffettuata: false,
+    selectedRoom: 1
 };
 
 const peopleSlice = createSlice({
-    name: "people",
+    name: "ufficio",
     initialState,
     reducers: {
+        addPrenotazioneAction,
         setIsPrenotatoAction,
         setSelectedRoomAction,
-
-        createMeAction,
-        toggleIsInOfficeAction,
-        removePersonAction
-
+        toggleIsInUfficioAction
+    },
+    extraReducers: (builder) => {
+        builder.addCase(createPrenotazione.pending, (state) => { });
+        builder.addCase(createPrenotazione.fulfilled, (state) => { return { ...state } });
+        builder.addCase(createPrenotazione.rejected, (state) => { });
     }
 })
 
-export const { createMeAction: createMe, removePersonAction: removePerson, setSelectedRoomAction: setSelectedRoom, setIsPrenotatoAction: setIsPrenotato, toggleIsInOfficeAction: toggleIsInOffice } = peopleSlice.actions
+export const {
+    addPrenotazioneAction: addPrenotazione,
+    setIsPrenotatoAction: setIsPrenotato,
+    setSelectedRoomAction: setSelectedRoom,
+    toggleIsInUfficioAction: toggleIsInUfficio,
+    ...actions } = peopleSlice.actions
 export default peopleSlice.reducer;
+
