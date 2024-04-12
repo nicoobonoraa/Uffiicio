@@ -6,10 +6,11 @@ import PrenotaButtonComponent from '../../components/molecules/prenotaButtonComp
 import ConfermaPrenotazioneButton from '../../components/atoms/confermaPrenotazioneButton/ConfermaPrenotazioneButton';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../redux/store/store';
+import { FlatList } from 'react-native';
 
 const PrenotazioneScreen = () => {
 
-
+    const stanzeArray = [1, 2, 3, 4]
 
     const [dateIn, setDateIn] = useState(new Date(1598051730000));
     const [dateOut, setDateOut] = useState(new Date(1598051730000));
@@ -38,16 +39,13 @@ const PrenotazioneScreen = () => {
             </Text>
 
             {/* Form */}
-            <ScrollView
-                horizontal>
-                <StanzaComponent stanzaId={1}></StanzaComponent>
-                <StanzaComponent stanzaId={2}></StanzaComponent>
-                <StanzaComponent stanzaId={2}></StanzaComponent>
-                <StanzaComponent stanzaId={2}></StanzaComponent>
-                <StanzaComponent stanzaId={2}></StanzaComponent>
-                <StanzaComponent stanzaId={2}></StanzaComponent>
-                <StanzaComponent stanzaId={2}></StanzaComponent>
-            </ScrollView>
+            <FlatList
+            horizontal
+            data={stanzeArray}
+            renderItem={({item}) => 
+                <StanzaComponent stanzaId={item}></StanzaComponent>
+            }
+            />
 
             {showIn && 
             <DateTimePicker

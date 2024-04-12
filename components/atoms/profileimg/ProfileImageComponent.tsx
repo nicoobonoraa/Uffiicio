@@ -7,7 +7,7 @@ import {
 
 const ProfileImageComponent = (props : any) => {
 
-    const {width, height, src, isInOffice} = props
+    const {width, height, src, isInOffice, isLeftColumn} = props
     const [isOffice, setIsOffice] = useState(isInOffice)
 
     useEffect(() => {
