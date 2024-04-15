@@ -17,15 +17,17 @@ const Dashboard = () => {
     const prenotazioniList = useSelector((state: IRootState) => state.peopleReducer.prenotazioneList)
     const stanzeList = useSelector((state: IRootState) => state.peopleReducer.stanzeList)
 
+    // const peopleInUfficio = prenotazioniList.filter(prenotazione => prenotazione.stanza).length
+
     const isPrenotato = useSelector((state: IRootState) => state.peopleReducer.isPrenotazioneEffettuata)
-    
+
     return (
         <View style={[screenStyles.wrapper]}>
 
             {/* Header */}
             <View style={dashStyles.header}>
                 <View style={dashStyles.dot}></View>
-                <Text style={[screenStyles.text, dashStyles.peopleText, {flex: 1}]}>{peopleList.length}/20</Text>
+                <Text style={[screenStyles.text, dashStyles.peopleText, {flex: 1}]}>{prenotazioniList.length}/20</Text>
                 <Text style={[screenStyles.text, screenStyles.semiBoldTitle]}>Enhancers Office</Text>
             </View>
 
@@ -34,7 +36,7 @@ const Dashboard = () => {
                 <FlatList
                 data={stanzeList}
                 numColumns={2}
-                renderItem={({item}) => <StanzaComponent stanzaId={item.id} shouldNavigate={true}/>}></FlatList>                
+                renderItem={({item}) => <StanzaComponent stanzaId={item.id} shouldNavigate={true}/>}></FlatList>
             </View>
 
             {/* Persone in ufficio */}
@@ -44,10 +46,10 @@ const Dashboard = () => {
                 scrollEnabled
                 style={isPrenotato && {height: 200}}
                 data={prenotazioniList.filter(prenotazione => prenotazione.isInOffice==true)}
-                renderItem={({item}) => 
+                renderItem={({item}) =>
                     <PersonInfosComponent prenotazione={item}/>
                 }>
-                    
+
                 </FlatList>
             </View>
 
