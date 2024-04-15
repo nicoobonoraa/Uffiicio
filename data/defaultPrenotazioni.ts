@@ -13,7 +13,7 @@ export const defaultPrenotazioni: Prenotazione[] = [
         id: 1,
         oraArrivo: new Date(2024, 3, 12, 9, 0).toISOString(), // 12 aprile 2024, ore 09:00
         oraUscita: new Date(2024, 3, 12, 12, 0).toISOString(), // 12 aprile 2024, ore 12:00
-        isInOffice: false,
+        isInOffice: true,
         stanza: 1,
         persona: 0
     },
@@ -29,7 +29,7 @@ export const defaultPrenotazioni: Prenotazione[] = [
         id: 3,
         oraArrivo: new Date(2024, 3, 12, 14, 0).toISOString(), // 12 aprile 2024, ore 14:00
         oraUscita: new Date(2024, 3, 12, 18, 0).toISOString(), // 12 aprile 2024, ore 18:00
-        isInOffice: false,
+        isInOffice: true,
         stanza: 3,
         persona: 3
     },

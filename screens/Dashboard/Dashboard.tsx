@@ -37,16 +37,16 @@ const Dashboard = () => {
             </View>
 
             {/* Persone in ufficio */}
-            {/* <View>
-                <Text style={[screenStyles.text, screenStyles.semiBoldTitle, {marginTop: 20}]}>Persone in ufficio</Text>
+            <View>
+                <Text style={[screenStyles.text, screenStyles.semiBoldTitle, {marginTop: 20, marginBottom: 12}]}>Persone in ufficio</Text>
                 <FlatList
-                data={people}
+                data={prenotazioniList.filter(prenotazione => prenotazione.isInOffice==true)}
                 renderItem={({item}) => 
-                    <PersonInfosComponent person={item}/>
+                    <PersonInfosComponent prenotazione={item}/>
                 }>
                     
                 </FlatList>
-            </View> */}
+            </View>
 
 
             {/* Button */}
