@@ -6,14 +6,21 @@ import Person from "../../../types/person";
 import { personInfoStyles } from "./PersonInfoComponents";
 import { colors } from "../../../defaultStyles/colors";
 import { screenStyles } from "../../../screens/screenStyles/screenStyles";
+import moment from 'moment';
 
 const PersonInfosComponent = (props : any) => {
     
     const {prenotazione}  = props
     const people = useSelector((state: IRootState) => state.peopleReducer.peopleList)
     const person : Person = people.filter(p => p.id == prenotazione.persona)[0]
+
+    console.log(new Date(prenotazione.oraArrivo).getTime())
     
     console.log("person profilePic: ", person.profilePic)
+
+    const convertToMoment = (date: Date) => {
+        return moment(date)
+    }
 
     return (
         <View style={personInfoStyles.wrapper}>
@@ -33,9 +40,9 @@ const PersonInfosComponent = (props : any) => {
             </View>
             <Text style={screenStyles.text}>{person.name}</Text>
             <View  style={personInfoStyles.date}>
-                <Text style={screenStyles.text}>{new Date(prenotazione.oraArrivo).getHours()}:{new Date(prenotazione.oraArrivo).getMinutes()}</Text>
+                <Text style={screenStyles.text}>{convertToMoment(prenotazione.oraArrivo).format('HH:mm')}</Text>
                 <Text> - </Text>
-                <Text style={screenStyles.text}>{new Date(prenotazione.oraUscita).getHours()}:{new Date(prenotazione.oraArrivo).getMinutes()}</Text>
+                <Text style={screenStyles.text}>{convertToMoment(prenotazione.oraUscita).format('HH:mm')}</Text>
             </View>
         </View>
     )
