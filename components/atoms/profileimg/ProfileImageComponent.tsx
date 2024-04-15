@@ -23,8 +23,8 @@ const ProfileImageComponent = (props : any) => {
                 source={{
                     uri: person.profilePic
                 }}
-                width={width | 50}
-                height={height | 50}
+                width={width | 32}
+                height={height | 32}
                 style={[!isOffice ? {opacity: 0.3} : {opacity: 1}, {borderRadius: 50, marginRight: 10}]}
             ></Image>
         </View>

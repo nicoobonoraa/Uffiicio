@@ -17,6 +17,7 @@ const Dashboard = () => {
     const prenotazioniList = useSelector((state: IRootState) => state.peopleReducer.prenotazioneList)
     const stanzeList = useSelector((state: IRootState) => state.peopleReducer.stanzeList)
 
+    const isPrenotato = useSelector((state: IRootState) => state.peopleReducer.isPrenotazioneEffettuata)
     
     return (
         <View style={[screenStyles.wrapper]}>
@@ -40,6 +41,8 @@ const Dashboard = () => {
             <View>
                 <Text style={[screenStyles.text, screenStyles.semiBoldTitle, {marginTop: 20, marginBottom: 12}]}>Persone in ufficio</Text>
                 <FlatList
+                scrollEnabled
+                style={isPrenotato && {height: 200}}
                 data={prenotazioniList.filter(prenotazione => prenotazione.isInOffice==true)}
                 renderItem={({item}) => 
                     <PersonInfosComponent prenotazione={item}/>

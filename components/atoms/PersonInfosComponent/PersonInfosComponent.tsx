@@ -33,9 +33,9 @@ const PersonInfosComponent = (props : any) => {
             </View>
             <Text style={screenStyles.text}>{person.name}</Text>
             <View  style={personInfoStyles.date}>
-                <Text style={screenStyles.text}>{new Date(prenotazione.oraArrivo).getHours()}:{new Date(prenotazione.oraArrivo).getMinutes()}0</Text>
+                <Text style={screenStyles.text}>{new Date(prenotazione.oraArrivo).getHours()}:{new Date(prenotazione.oraArrivo).getMinutes()}</Text>
                 <Text> - </Text>
-                <Text style={screenStyles.text}>{new Date(prenotazione.oraUscita).getHours()}:{new Date(prenotazione.oraArrivo).getMinutes()}0</Text>
+                <Text style={screenStyles.text}>{new Date(prenotazione.oraUscita).getHours()}:{new Date(prenotazione.oraArrivo).getMinutes()}</Text>
             </View>
         </View>
     )

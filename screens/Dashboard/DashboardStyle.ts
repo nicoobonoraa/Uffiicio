@@ -9,7 +9,7 @@ export const dashStyles = StyleSheet.create({
         marginRight: 10
     },
     peopleText: {
-        fontSize: 24
+        fontSize: 20
     },
     header: {
         display: 'flex',

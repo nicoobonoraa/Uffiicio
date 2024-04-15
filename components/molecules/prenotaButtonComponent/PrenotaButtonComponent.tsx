@@ -36,7 +36,7 @@ const PrenotaButtonComponent = (props : any) => {
                     pageToNavigate && navigation.navigate(pageToNavigate)
                 }}>
                     <View style = {[{margin: 0}, prenotaButtonStyles.button]}>
-                        <Text style={[screenStyles.text, {fontWeight: '600', fontSize: 20}]}>Prenota un posto</Text>
+                        <Text style={[screenStyles.text, {fontWeight: '600', fontSize: 16}]}>Prenota un posto</Text>
                     </View>
                 </Pressable>
             }

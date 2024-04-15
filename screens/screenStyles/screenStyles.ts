@@ -12,6 +12,6 @@ export const screenStyles = StyleSheet.create({
     },
     semiBoldTitle: {
         fontWeight: '600',
-        fontSize: 24
+        fontSize: 20
     }
 })
