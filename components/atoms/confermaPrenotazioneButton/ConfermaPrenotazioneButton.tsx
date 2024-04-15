@@ -9,6 +9,7 @@ import { Prenotazione } from "../../../types/Prenotazione";
 import { confermaPrenotazioneStyles } from "./confermaPrenotazioneStyle";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { createPrenotazione } from "../../../redux/thunks/thunks";
+import { prenotaButtonStyles } from "../../molecules/prenotaButtonComponent/prenotaButtonStyles";
 
 
 
@@ -36,16 +37,19 @@ const ConfermaPrenotazioneButton = (props : any) => {
     };
 
     return (
-        <TouchableOpacity
-        style={confermaPrenotazioneStyles.wrapper}
-        onPress={ () => {
-                handleAddPerson()
-                navigation.navigate('Dashboard')
-            }
-        }>
-            <Text>Conferma Prenotazione</Text>
-            <Text>V</Text>
-        </TouchableOpacity>
+        <View style={{flex: 1}}>
+            <TouchableOpacity
+            style={[prenotaButtonStyles.buttonContainer]}
+            onPress={ () => {
+                    handleAddPerson()
+                    navigation.navigate('Dashboard')
+                }
+            }>
+                <View style={prenotaButtonStyles.button}>
+                    <Text style={prenotaButtonStyles.buttonText}>Conferma Prenotazione</Text>
+                </View>
+            </TouchableOpacity>
+        </View>
     )
 }
 

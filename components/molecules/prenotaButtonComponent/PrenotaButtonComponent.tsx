@@ -36,7 +36,7 @@ const PrenotaButtonComponent = (props : any) => {
                     pageToNavigate && navigation.navigate(pageToNavigate)
                 }}>
                     <View style = {[{margin: 0}, prenotaButtonStyles.button]}>
-                        <Text style={[screenStyles.text, {fontWeight: '600', fontSize: 16}]}>Prenota un posto</Text>
+                        <Text style={[screenStyles.text, prenotaButtonStyles.buttonText]}>Prenota un posto</Text>
                     </View>
                 </Pressable>
             }
@@ -49,8 +49,9 @@ const PrenotaButtonComponent = (props : any) => {
                         value={enabled}
                         thumbColor={!enabled ? colors.orange100 : colors.green100}
                         trackColor={{false: colors.orange40, true: colors.green40} }
+                        style={{marginRight: 10}}
                     />
-                    <Text style={[prenotaButtonStyles.buttonText, !enabled ? {color: colors.orange100} : {color: colors.green100}]}>Non sono in ufficio</Text>
+                    <Text style={[prenotaButtonStyles.buttonText, !enabled ? {color: colors.orange100} : {color: colors.green100}]}>{!enabled ? 'Non sono in ufficio' : 'Sono in ufficio'}</Text>
                 </View>
                 <View style={{width: '100%'}}>
                     <Pressable

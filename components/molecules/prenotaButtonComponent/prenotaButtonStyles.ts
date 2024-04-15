@@ -5,7 +5,7 @@ export const prenotaButtonStyles = StyleSheet.create({
     buttonContainer: {
         position: 'absolute',
         bottom: 25,
-        width: '100%'
+        width: '100%',
     },
     button: {
         backgroundColor: colors.blue,
@@ -41,6 +41,7 @@ export const prenotaButtonStyles = StyleSheet.create({
     },
     buttonText: {
         fontWeight: '600',
-        fontSize: 20
+        fontSize: 16,
+        color: 'white'
     }
 })

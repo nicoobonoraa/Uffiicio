@@ -6,7 +6,7 @@ export const stanzaStyles = StyleSheet.create({
         // width: '100%',
         backgroundColor: colors.black3,
         // width: 155,
-        height: 110,
+        height: 120,
         borderRadius: 9,
         padding: 16,
     },

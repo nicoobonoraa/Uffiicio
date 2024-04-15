@@ -12,7 +12,7 @@ import { setSelectedRoom } from "../../../redux/reducers/reducers";
 
 const StanzaComponent = (props : any) => {
 
-    const { stanzaId, stanzaNome, shouldNavigate, isLeftColumn } = props 
+    const { stanzaId, stanzaNome, shouldNavigate, isLeftColumn, width } = props 
     const navigation : NavigationProp<any, any> = useNavigation();
     // const people = peopleReducer
     // const people = useSelector((state: IRootState) => state.peopleReducer.peopleList).filter(person => person.stanza === stanzaId)
@@ -39,11 +39,14 @@ const StanzaComponent = (props : any) => {
             dispatch(setSelectedRoom(stanzaId))
             shouldNavigate && navigation.navigate('StanzaScreen')
         }}>
-            <View style={[stanzaStyles.stanza, stanzaId%2==0 && {marginRight: 14}, stanzaId < 2 && {marginBottom: 12}]}>
+            <View style={[stanzaStyles.stanza,  width && {marginRight: 14}, stanzaId%2==0 && {marginRight: 14}, stanzaId < 2 && {marginBottom: 12}]}>
+                <Text style={{position: 'absolute', bottom: 10, left: 10, opacity: .8}}>{stanzaNome ? stanzaNome : 'Stanza'}</Text>
                 <FlatList
+                // key={'#'}
+                // keyExtractor={item => "#" + item.id}
                 data={filteredPrenotazioni}
-                horizontal
-                style={stanzaStyles.listOfPeople}
+                numColumns={3}
+                style={[stanzaStyles.listOfPeople, width && {width: width}]}
                 renderItem={({item}) => <ProfileImageComponent 
                 key={item.id} 
                 person={getPersonOnPrenotazioneId(item.persona)} 
