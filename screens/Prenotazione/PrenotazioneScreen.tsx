@@ -8,11 +8,11 @@ import { useSelector } from 'react-redux';
 import { IRootState } from '../../redux/store/store';
 import { FlatList } from 'react-native';
 import { screenStyles } from '../screenStyles/screenStyles';
+import { State } from 'react-native-gesture-handler';
 
 const PrenotazioneScreen = () => {
 
-    const stanzeArray = [1, 2, 3, 4]
-
+    const stanzeArray = useSelector((state: IRootState) => state.peopleReducer.stanzeList)
     const [dateIn, setDateIn] = useState(new Date(1598051730000));
     const [dateOut, setDateOut] = useState(new Date(1598051730000));
     const [showIn, setShowIn] = useState(false)
@@ -44,7 +44,7 @@ const PrenotazioneScreen = () => {
             horizontal
             data={stanzeArray}
             renderItem={({item}) => 
-                <StanzaComponent stanzaId={item}></StanzaComponent>
+                <StanzaComponent stanzaId={item.id}></StanzaComponent>
             }
             />
 

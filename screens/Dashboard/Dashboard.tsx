@@ -33,7 +33,7 @@ const Dashboard = () => {
                 <FlatList
                 data={stanzeList}
                 numColumns={2}
-                renderItem={({item}) => <StanzaComponent stanzaId={item.id}/>}></FlatList>                
+                renderItem={({item}) => <StanzaComponent stanzaId={item.id} shouldNavigate={true}/>}></FlatList>                
             </View>
 
             {/* Persone in ufficio */}
