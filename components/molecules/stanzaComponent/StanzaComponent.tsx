@@ -47,7 +47,7 @@ const StanzaComponent = (props : any) => {
                 stanzaId%2==0 && {marginRight: 14},
                 stanzaId < 2 && {marginBottom: 12},
                 (!shouldNavigate && selectedStanza == stanzaId) && {borderColor: colors.green100, borderWidth: 1}]}>
-                <Text style={{position: 'absolute', bottom: 10, left: 10, opacity: .8}}>{stanzaNome ? stanzaNome : 'Stanza'}</Text>
+                <Text style={[{position: 'absolute', bottom: 10, left: 10, opacity: .8}, {color: 'white'}]}>{stanzaNome ? stanzaNome : 'Stanza Senza Nome'}</Text>
                 <FlatList
                 // key={'#'}
                 // keyExtractor={item => "#" + item.id}

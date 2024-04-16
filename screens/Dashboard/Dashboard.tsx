@@ -1,5 +1,5 @@
 import React from "react";
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, Platform, Text, View} from 'react-native';
 import ProfileImageComponent from "../../components/atoms/profileimg/ProfileImageComponent";
 import StanzaComponent from "../../components/molecules/stanzaComponent/StanzaComponent";
 import { useSelector } from "react-redux";
@@ -22,7 +22,7 @@ const Dashboard = () => {
     const isPrenotato = useSelector((state: IRootState) => state.peopleReducer.isPrenotazioneEffettuata)
 
     return (
-        <View style={[screenStyles.wrapper]}>
+        <View style={[screenStyles.wrapper, Platform.OS == 'ios' && {paddingTop: 60}]}>
 
             {/* Header */}
             <View style={dashStyles.header}>

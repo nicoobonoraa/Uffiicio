@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {View, Text, ScrollView, Pressable, SectionList, Image} from 'react-native'
+import {View, Text, ScrollView, Pressable, SectionList, Image, Platform} from 'react-native'
 import StanzaComponent from '../../components/molecules/stanzaComponent/StanzaComponent';
 import DateTimePicker, { DateTimePickerAndroid, DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import PrenotaButtonComponent from '../../components/molecules/prenotaButtonComponent/PrenotaButtonComponent';
@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { prenotazioneScreenStyles } from './PrenotazioneScreen';
 import Person from '../../types/person';
 import ProfileImageComponent from '../../components/atoms/profileimg/ProfileImageComponent';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 
 const PrenotazioneScreen = () => {
@@ -43,6 +44,14 @@ const PrenotazioneScreen = () => {
         setDateOut(currentDate);
         setShowOut(false)
     };
+    const handleConfirmIn = (date : any) => {
+        setDateIn(date)
+        setShowIn(false)
+    }
+    const handleConfirmOut = (date : any) => {
+        setDateOut(date)
+        setShowOut(false)
+    }
 
     return (
         <View style={screenStyles.wrapper}>
@@ -77,7 +86,26 @@ const PrenotazioneScreen = () => {
                 />
             </View>
 
-            {showIn && 
+            {Platform.OS == 'ios' &&
+                <DateTimePickerModal
+                    isVisible={showIn}
+                    mode="time"
+                    onConfirm={handleConfirmIn}
+                    onCancel={() => setShowIn(false)}
+                />
+            }
+
+            {Platform.OS == 'ios' &&
+                <DateTimePickerModal
+                    isVisible={showOut}
+                    mode="time"
+                    onConfirm={handleConfirmOut}
+                    onCancel={() => setShowOut(false)}
+                />
+            }
+
+
+            {(showIn && Platform.OS == 'android') && 
             <DateTimePicker
                 testID="dateTimePicker"
                 value={dateIn}
@@ -85,9 +113,10 @@ const PrenotazioneScreen = () => {
                 is24Hour={true}
                 onChange={onChangeIn}
                 />
+                
             }
 
-            {showOut && 
+            {(showOut && Platform.OS == 'android') && 
             <DateTimePicker
                 testID="dateTimePicker"
                 value={dateOut}
