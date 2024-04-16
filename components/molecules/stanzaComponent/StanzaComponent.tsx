@@ -13,7 +13,7 @@ import { colors } from "../../../defaultStyles/colors";
 
 const StanzaComponent = (props : any) => {
 
-    const { stanzaId, stanzaNome, shouldNavigate, isLeftColumn, width } = props 
+    const { stanzaId, shouldNavigate, isLeftColumn, width } = props 
     const navigation : NavigationProp<any, any> = useNavigation();
     // const people = peopleReducer
     // const people = useSelector((state: IRootState) => state.peopleReducer.peopleList).filter(person => person.stanza === stanzaId)
@@ -24,6 +24,7 @@ const StanzaComponent = (props : any) => {
     const stanzeList = useSelector((state: IRootState) => state.peopleReducer.stanzeList)
 
     const selectedStanza = useSelector((state: IRootState) => state.peopleReducer.selectedRoom)
+    const stanzaNome = useSelector((state : IRootState) => state.peopleReducer.stanzeList).filter(stanza => stanza.id == stanzaId)[0].nomeStanza
 
     const filteredPrenotazioni = prenotazioniList.filter(prenotazione => prenotazione.stanza == stanzaId)
     // console.log(stanzaId)

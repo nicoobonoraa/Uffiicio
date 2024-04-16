@@ -41,7 +41,7 @@ const PersonInfosComponent = (props : any) => {
             <Text style={screenStyles.text}>{person.name}</Text>
             <View  style={personInfoStyles.date}>
                 <Text style={screenStyles.text}>{convertToMoment(prenotazione.oraArrivo).format('HH:mm')}</Text>
-                <Text> - </Text>
+                <Text style={{color: 'white'}}> - </Text>
                 <Text style={screenStyles.text}>{convertToMoment(prenotazione.oraUscita).format('HH:mm')}</Text>
             </View>
         </View>

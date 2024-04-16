@@ -135,7 +135,7 @@ const PrenotazioneScreen = () => {
                     onPress={() => {
                         setShowIn(true)
                     }}>
-                        <Text>{dateIn.getHours()}:{dateIn.getMinutes()}</Text>
+                        <Text style={screenStyles.text}>{dateIn.getHours()}:{dateIn.getMinutes()}</Text>
                     </Pressable>
                 </View>
 
@@ -154,7 +154,7 @@ const PrenotazioneScreen = () => {
                     onPress={() => {
                         setShowOut(true)
                     }}>
-                        <Text>{dateOut.getHours()}:{dateOut.getMinutes()}</Text>
+                        <Text style={screenStyles.text}>{dateOut.getHours()}:{dateOut.getMinutes()}</Text>
                     </Pressable>
                 </View>
             </View>
