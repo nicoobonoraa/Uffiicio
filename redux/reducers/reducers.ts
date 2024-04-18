@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 // import { ADD_PERSON, addPersonAction, createMeAction, setIsPrenotatoAction, setSelectedRoomAction } from "../actions/actions";
 import Person from "../../types/person";
-import { addPrenotazioneAction, deletePrenotazioneAction, setIsPrenotatoAction, setPrenotazioniAction, setSelectedRoomAction, toggleIsInUfficioAction } from "../actions/actions";
+import { addPrenotazioneAction, deletePrenotazioneAction, setIsPrenotatoAction, setPrenotazioniAction, setSelectedRoomAction, setStanzeAction, toggleIsInUfficioAction } from "../actions/actions";
 import { Stanza } from "../../types/Stanza";
 import { Prenotazione } from "../../types/Prenotazione";
 import { defaultPeople } from "../../data/defaultPeople";
@@ -20,7 +20,7 @@ export interface UfficioState {
 }
 
 const initialState: UfficioState = {
-    stanzeList: defaultStanze,
+    stanzeList: [],
     peopleList: defaultPeople,
     prenotazioneList: [],
     isPrenotazioneEffettuata: false,
@@ -37,7 +37,8 @@ const peopleSlice = createSlice({
         toggleIsInUfficioAction,
         deletePrenotazioneAction,
 
-        setPrenotazioniAction
+        setPrenotazioniAction,
+        setStanzeAction
     },
     extraReducers: (builder) => {
         builder.addCase(createPrenotazione.pending, (state) => { });
@@ -70,6 +71,7 @@ export const {
     deletePrenotazioneAction: removePrenotazione,
 
     setPrenotazioniAction : setPrenotazioni,
+    setStanzeAction : setStanze,
     ...actions } = peopleSlice.actions
 export default peopleSlice.reducer;
 

@@ -9,7 +9,7 @@ import { screenStyles } from "../screenStyles/screenStyles";
 import { dashStyles } from "./DashboardStyle";
 import PersonInfosComponent from "../../components/atoms/PersonInfosComponent/PersonInfosComponent";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { fetchPrenotazioni } from "../../redux/thunks/thunks";
+import { fetchPrenotazioni, fetchStanze } from "../../redux/thunks/thunks";
 const Dashboard = () => {
 
     // const numOfPeople = useSelector((state: IRootState) => state.peopleReducer.nPeople)
@@ -22,7 +22,9 @@ const Dashboard = () => {
     const thunkDispatch = useDispatch<ThunkDispatch<IRootState, any,any>>()
   
     useEffect(() => {
-      thunkDispatch(fetchPrenotazioni())
+      thunkDispatch(fetchPrenotazioni()).then(() => {
+        thunkDispatch(fetchStanze())
+      })
     }, [])
     // const peopleInUfficio = prenotazioniList.filter(prenotazione => prenotazione.stanza).length
 

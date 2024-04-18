@@ -1,10 +1,12 @@
 import { asyncThunkCreator, createAsyncThunk } from "@reduxjs/toolkit";
-import { UfficioState, addPrenotazione, removePrenotazione, setIsPrenotato, setPrenotazioni, toggleIsInUfficio } from "../reducers/reducers";
+import { UfficioState, addPrenotazione, removePrenotazione, setIsPrenotato, setPrenotazioni, setStanze, toggleIsInUfficio } from "../reducers/reducers";
 import { Prenotazione } from "../../types/Prenotazione";
 import axios from 'axios'
+import { Stanza } from "../../types/Stanza";
 
 const BASE_API_URL = 'https://e727-93-44-81-22.ngrok-free.app/ufficio'
 const PRENOTAZIONI_URL = '/prenotazioni'
+const STANZE_URL = '/stanze'
 
 export const createPrenotazione = createAsyncThunk(
     '/ufficio/createPrenotazione',
@@ -36,6 +38,11 @@ export const deletePrenotazione = createAsyncThunk(
         }
     })
 
+
+
+
+//NEW THUNKS
+
 export const fetchPrenotazioni = createAsyncThunk(
     '/ufficio/fetchPrenotazioni',
     async(_, {dispatch, getState, rejectWithValue}) => {
@@ -54,6 +61,15 @@ export const fetchPrenotazioni = createAsyncThunk(
         } catch (err) {
             return rejectWithValue('ERRORE DURANTE IL FETCH DELLE PRENOTAZIONI' + err);
         }
+    }
+)
+
+export const fetchStanze = createAsyncThunk(
+    '/ufficio/fetchStanze',
+    async(_, {dispatch, rejectWithValue}) => {
+        axios.get<Stanza[]>(BASE_API_URL + STANZE_URL).then(response => {
+            dispatch(setStanze(response.data))
+        })
     }
 )
 

@@ -3,6 +3,7 @@ import Person from "../../types/person"
 import { UfficioState } from "../reducers/reducers";
 import { act } from "react-test-renderer";
 import { Prenotazione } from "../../types/Prenotazione";
+import { Stanza } from "../../types/Stanza";
 
 // export const addPersonAction = (state: PeopleState) => {
 
@@ -73,6 +74,14 @@ export const setPrenotazioniAction = (state: UfficioState, action: PayloadAction
         prenotazioneList : [...action.payload]
     }
 }
+
+export const setStanzeAction = (state: UfficioState, action: PayloadAction<Stanza[]>) => {
+    return {
+        ...state,
+        stanzeList : [...action.payload]
+    }
+}
+
 
 export const addPrenotazioneAction = (state: UfficioState, action: PayloadAction<Prenotazione>) => {
     return {
