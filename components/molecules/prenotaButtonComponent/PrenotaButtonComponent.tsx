@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../../redux/store/store";
 import { toggleIsInUfficio } from "../../../redux/reducers/reducers";
 import { ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
-import { deletePrenotazione } from "../../../redux/thunks/thunks";
+import { deletePrenotazione, rimuoviPrenotazione } from "../../../redux/thunks/thunks";
 import { screenStyles } from "../../../screens/screenStyles/screenStyles";
 import { prenotaButtonStyles } from "./prenotaButtonStyles";
 import { colors } from "../../../defaultStyles/colors";
@@ -56,7 +56,7 @@ const PrenotaButtonComponent = (props : any) => {
                 <View style={{width: '100%'}}>
                     <Pressable
                     onPress={()=>{
-                        thunkDispatch(deletePrenotazione(5))
+                        thunkDispatch(rimuoviPrenotazione())
                     }}>
                         <View style={[prenotaButtonStyles.button,  {backgroundColor: colors.red}]}>
                             <Text style={[prenotaButtonStyles.buttonText, {color: 'white'}]}>Disdici</Text>

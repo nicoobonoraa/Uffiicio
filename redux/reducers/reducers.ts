@@ -7,7 +7,7 @@ import { Prenotazione } from "../../types/Prenotazione";
 import { defaultPeople } from "../../data/defaultPeople";
 import { defaultStanze } from "../../data/defaultStanze";
 import { defaultPrenotazioni } from "../../data/defaultPrenotazioni";
-import { aggiungiPrenotazione, createPrenotazione, deletePrenotazione, fetchPrenotazioni } from "../thunks/thunks";
+import { aggiungiPrenotazione, createPrenotazione, deletePrenotazione, fetchPrenotazioni, rimuoviPrenotazione } from "../thunks/thunks";
 const nPeople = 0
 
 
@@ -55,6 +55,10 @@ const peopleSlice = createSlice({
         builder.addCase(aggiungiPrenotazione.pending, (state) => { });
         builder.addCase(aggiungiPrenotazione.fulfilled, (state) => { return { ...state } });
         builder.addCase(aggiungiPrenotazione.rejected, (state) => { });
+
+        builder.addCase(rimuoviPrenotazione.pending, (state) => { });
+        builder.addCase(rimuoviPrenotazione.fulfilled, (state) => { return { ...state } });
+        builder.addCase(rimuoviPrenotazione.rejected, (state) => { });
     }
 })
 

@@ -68,11 +68,33 @@ export const aggiungiPrenotazione = createAsyncThunk(
                 data,
                 )
             .then(() => {
-                dispatch(fetchPrenotazioni())
+                dispatch(fetchPrenotazioni()).then(
+                    () => dispatch(setIsPrenotato())
+                )
             })
             .catch((err) => console.error(err))
         } catch(err) {
             return rejectWithValue('ERRORE DURANTE IL POST DELLA PRENOTAZIONE' + err)
+        }
+    }
+)
+
+interface DeletePrenotazioneBody {
+    "prenotazioneId" : number
+}
+
+export const rimuoviPrenotazione = createAsyncThunk(
+    '/ufficio/rimuoviPrenotazione',
+    async(prenotazioneId, {dispatch, getState, rejectWithValue}) => {
+        try {
+            axios.delete(BASE_API_URL + PRENOTAZIONI_URL + '/5')
+            .then(() => {
+                dispatch(fetchPrenotazioni()).then(
+                    () => dispatch(setIsPrenotato())
+                ).catch(err => console.error(err)) 
+            }).catch(err => console.error(err)) 
+        } catch(err) {
+            return rejectWithValue('ERRORE DURANTE LA DELETE DELLA PRENOTAZIONE')
         }
     }
 )
