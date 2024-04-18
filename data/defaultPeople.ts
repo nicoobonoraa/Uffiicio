@@ -33,5 +33,5 @@ export const defaultPeople: Person[] = [
     },
 ];
 
-
+// module.exports = defaultPeople
 export default defaultPeople;

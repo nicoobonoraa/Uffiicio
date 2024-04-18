@@ -18,3 +18,5 @@ export const defaultStanze: Stanza[] = [
         nomeStanza: 'Sala riunioni'
     },
 ] 
+
+// module.exports = defaultStanze

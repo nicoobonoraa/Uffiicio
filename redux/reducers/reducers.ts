@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 // import { ADD_PERSON, addPersonAction, createMeAction, setIsPrenotatoAction, setSelectedRoomAction } from "../actions/actions";
 import Person from "../../types/person";
-import { addPrenotazioneAction, deletePrenotazioneAction, setIsPrenotatoAction, setSelectedRoomAction, toggleIsInUfficioAction } from "../actions/actions";
+import { addPrenotazioneAction, deletePrenotazioneAction, setIsPrenotatoAction, setPrenotazioniAction, setSelectedRoomAction, toggleIsInUfficioAction } from "../actions/actions";
 import { Stanza } from "../../types/Stanza";
 import { Prenotazione } from "../../types/Prenotazione";
 import { defaultPeople } from "../../data/defaultPeople";
 import { defaultStanze } from "../../data/defaultStanze";
 import { defaultPrenotazioni } from "../../data/defaultPrenotazioni";
-import { createPrenotazione, deletePrenotazione } from "../thunks/thunks";
+import { aggiungiPrenotazione, createPrenotazione, deletePrenotazione, fetchPrenotazioni } from "../thunks/thunks";
 const nPeople = 0
 
 
@@ -22,7 +22,7 @@ export interface UfficioState {
 const initialState: UfficioState = {
     stanzeList: defaultStanze,
     peopleList: defaultPeople,
-    prenotazioneList: defaultPrenotazioni,
+    prenotazioneList: [],
     isPrenotazioneEffettuata: false,
     selectedRoom: 1
 };
@@ -35,7 +35,9 @@ const peopleSlice = createSlice({
         setIsPrenotatoAction,
         setSelectedRoomAction,
         toggleIsInUfficioAction,
-        deletePrenotazioneAction
+        deletePrenotazioneAction,
+
+        setPrenotazioniAction
     },
     extraReducers: (builder) => {
         builder.addCase(createPrenotazione.pending, (state) => { });
@@ -45,6 +47,14 @@ const peopleSlice = createSlice({
         builder.addCase(deletePrenotazione.pending, (state) => { });
         builder.addCase(deletePrenotazione.fulfilled, (state) => { return { ...state } });
         builder.addCase(deletePrenotazione.rejected, (state) => { });
+
+        builder.addCase(fetchPrenotazioni.pending, (state) => { });
+        builder.addCase(fetchPrenotazioni.fulfilled, (state) => { return { ...state } });
+        builder.addCase(fetchPrenotazioni.rejected, (state) => { });
+
+        builder.addCase(aggiungiPrenotazione.pending, (state) => { });
+        builder.addCase(aggiungiPrenotazione.fulfilled, (state) => { return { ...state } });
+        builder.addCase(aggiungiPrenotazione.rejected, (state) => { });
     }
 })
 
@@ -54,6 +64,8 @@ export const {
     setSelectedRoomAction: setSelectedRoom,
     toggleIsInUfficioAction: toggleIsInUfficio,
     deletePrenotazioneAction: removePrenotazione,
+
+    setPrenotazioniAction : setPrenotazioni,
     ...actions } = peopleSlice.actions
 export default peopleSlice.reducer;
 

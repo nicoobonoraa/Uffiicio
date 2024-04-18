@@ -67,6 +67,13 @@ import { Prenotazione } from "../../types/Prenotazione";
 //     console.log(state.self)
 // }
 
+export const setPrenotazioniAction = (state: UfficioState, action: PayloadAction<Prenotazione[]>) => {
+    return {
+        ...state,
+        prenotazioneList : [...action.payload]
+    }
+}
+
 export const addPrenotazioneAction = (state: UfficioState, action: PayloadAction<Prenotazione>) => {
     return {
         ...state,

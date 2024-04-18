@@ -1,6 +1,10 @@
 import { asyncThunkCreator, createAsyncThunk } from "@reduxjs/toolkit";
-import { UfficioState, addPrenotazione, removePrenotazione, setIsPrenotato } from "../reducers/reducers";
+import { UfficioState, addPrenotazione, removePrenotazione, setIsPrenotato, setPrenotazioni } from "../reducers/reducers";
 import { Prenotazione } from "../../types/Prenotazione";
+import axios from 'axios'
+
+const BASE_API_URL = 'https://e727-93-44-81-22.ngrok-free.app/ufficio'
+const PRENOTAZIONI_URL = '/prenotazioni'
 
 export const createPrenotazione = createAsyncThunk(
     '/ufficio/createPrenotazione',
@@ -31,3 +35,44 @@ export const deletePrenotazione = createAsyncThunk(
             return thunkApi.rejectWithValue('ERRORE' + err)
         }
     })
+
+export const fetchPrenotazioni = createAsyncThunk(
+    '/ufficio/fetchPrenotazioni',
+    async(_, {dispatch, getState, rejectWithValue}) => {
+        try {
+            axios.get<Prenotazione[]>(BASE_API_URL + PRENOTAZIONI_URL)
+            .then(
+                (response) => dispatch(setPrenotazioni(response.data))
+            ).catch(err => console.error(err.message))
+        } catch (err) {
+            return rejectWithValue('ERRORE DURANTE IL FETCH DELLE PRENOTAZIONI' + err)
+        }
+    }
+)
+
+interface addPrenotazioneBody {
+    "newPrenotazione" : Prenotazione
+}
+
+export const aggiungiPrenotazione = createAsyncThunk(
+    '/ufficio/aggiungiPrenotazione',
+    async (prenotazione : Prenotazione, {dispatch, getState, rejectWithValue}) => {
+        try {
+            const data : addPrenotazioneBody = {
+                "newPrenotazione" : prenotazione
+            }
+
+
+            axios.post(
+                BASE_API_URL + PRENOTAZIONI_URL,
+                data,
+                )
+            .then(() => {
+                dispatch(fetchPrenotazioni())
+            })
+            .catch((err) => console.error(err))
+        } catch(err) {
+            return rejectWithValue('ERRORE DURANTE IL POST DELLA PRENOTAZIONE' + err)
+        }
+    }
+)

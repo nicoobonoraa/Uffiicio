@@ -8,7 +8,7 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Prenotazione } from "../../../types/Prenotazione";
 import { confermaPrenotazioneStyles } from "./confermaPrenotazioneStyle";
 import { ThunkDispatch } from "@reduxjs/toolkit";
-import { createPrenotazione } from "../../../redux/thunks/thunks";
+import { aggiungiPrenotazione, createPrenotazione } from "../../../redux/thunks/thunks";
 import { prenotaButtonStyles } from "../../molecules/prenotaButtonComponent/prenotaButtonStyles";
 
 
@@ -21,10 +21,11 @@ const ConfermaPrenotazioneButton = (props : any) => {
 
     const selectedRoom = useSelector((state: IRootState) => state.peopleReducer.selectedRoom)
 
+    
     const prenotazione : Prenotazione = {
         id: useSelector((state: IRootState) => state.peopleReducer.peopleList.length + 1),
-        oraArrivo: new Date(oraIn).toISOString(),
-        oraUscita: new Date(oraOut).toISOString(),
+        oraArrivo: new Date(oraIn),
+        oraUscita: new Date(oraOut),
         isInOffice: false,
         stanza: selectedRoom,
         persona: 5
@@ -32,7 +33,7 @@ const ConfermaPrenotazioneButton = (props : any) => {
 
     const handleAddPerson = () => {
         thunkDispatch(
-            createPrenotazione(prenotazione))
+            aggiungiPrenotazione(prenotazione))
         // console.log(self)
     };
 

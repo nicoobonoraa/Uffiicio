@@ -50,3 +50,5 @@ export const defaultPrenotazioni: Prenotazione[] = [
     //     persona: 3
     // }
 ];
+
+// module.exports = defaultPrenotazioni
