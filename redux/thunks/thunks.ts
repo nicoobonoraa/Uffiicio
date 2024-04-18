@@ -1,5 +1,5 @@
 import { asyncThunkCreator, createAsyncThunk } from "@reduxjs/toolkit";
-import { UfficioState, addPrenotazione, removePrenotazione, setIsPrenotato, setPrenotazioni } from "../reducers/reducers";
+import { UfficioState, addPrenotazione, removePrenotazione, setIsPrenotato, setPrenotazioni, toggleIsInUfficio } from "../reducers/reducers";
 import { Prenotazione } from "../../types/Prenotazione";
 import axios from 'axios'
 
@@ -13,7 +13,7 @@ export const createPrenotazione = createAsyncThunk(
         try {
             if (!isPrenotazioneEffettuata) {
                 thunkApi.dispatch(addPrenotazione(payload))
-                thunkApi.dispatch(setIsPrenotato())
+                thunkApi.dispatch(setIsPrenotato(true))
             }
             return 1
         } catch (err) {
@@ -28,7 +28,7 @@ export const deletePrenotazione = createAsyncThunk(
         try {
             if (!isPrenotazioneEffettuata) {
                 thunkApi.dispatch(removePrenotazione(payload))
-                thunkApi.dispatch(setIsPrenotato())
+                thunkApi.dispatch(setIsPrenotato(false))
             }
             return 1
         } catch (err) {
@@ -40,12 +40,19 @@ export const fetchPrenotazioni = createAsyncThunk(
     '/ufficio/fetchPrenotazioni',
     async(_, {dispatch, getState, rejectWithValue}) => {
         try {
-            axios.get<Prenotazione[]>(BASE_API_URL + PRENOTAZIONI_URL)
-            .then(
-                (response) => dispatch(setPrenotazioni(response.data))
-            ).catch(err => console.error(err.message))
+            const response = await axios.get<Prenotazione[]>(BASE_API_URL + PRENOTAZIONI_URL);
+            const prenotazioni = response.data;
+
+            // Controlla se l'utente è presente tra le prenotazioni
+            const isPrenotato = prenotazioni.some(prenotazione => prenotazione.persona === 5);
+
+            // Aggiorna lo state con `isPRenotato`
+            dispatch(setIsPrenotato(isPrenotato));
+
+            // Imposta le prenotazioni nello state
+            dispatch(setPrenotazioni(prenotazioni));
         } catch (err) {
-            return rejectWithValue('ERRORE DURANTE IL FETCH DELLE PRENOTAZIONI' + err)
+            return rejectWithValue('ERRORE DURANTE IL FETCH DELLE PRENOTAZIONI' + err);
         }
     }
 )
@@ -69,7 +76,7 @@ export const aggiungiPrenotazione = createAsyncThunk(
                 )
             .then(() => {
                 dispatch(fetchPrenotazioni()).then(
-                    () => dispatch(setIsPrenotato())
+                    () => dispatch(setIsPrenotato(true))
                 )
             })
             .catch((err) => console.error(err))
@@ -85,16 +92,32 @@ interface DeletePrenotazioneBody {
 
 export const rimuoviPrenotazione = createAsyncThunk(
     '/ufficio/rimuoviPrenotazione',
-    async(prenotazioneId, {dispatch, getState, rejectWithValue}) => {
+    async(_, {dispatch, rejectWithValue}) => {
         try {
             axios.delete(BASE_API_URL + PRENOTAZIONI_URL + '/5')
             .then(() => {
                 dispatch(fetchPrenotazioni()).then(
-                    () => dispatch(setIsPrenotato())
+                    () => dispatch(setIsPrenotato(false))
                 ).catch(err => console.error(err)) 
             }).catch(err => console.error(err)) 
         } catch(err) {
-            return rejectWithValue('ERRORE DURANTE LA DELETE DELLA PRENOTAZIONE')
+            return rejectWithValue('ERRORE DURANTE LA DELETE DELLA PRENOTAZIONE' + err)
+        }
+    }
+)
+
+export const toggleInUfficio = createAsyncThunk(
+    '/ufficio/toggleInUfficio',
+    async(_, {dispatch, rejectWithValue}) => {
+        try {
+            axios.put(BASE_API_URL + PRENOTAZIONI_URL + '/5/isInUfficio').then(() => {
+                    dispatch(fetchPrenotazioni()).then(
+                        () => toggleIsInUfficio()
+                    )
+                }
+            )
+        } catch(err) {
+            return rejectWithValue('ERRORE DURANTE IL TOGGLE DI ISINUFFICIO' + err)
         }
     }
 )

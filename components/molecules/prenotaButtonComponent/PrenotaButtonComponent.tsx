@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../../redux/store/store";
 import { toggleIsInUfficio } from "../../../redux/reducers/reducers";
 import { ThunkAction, ThunkDispatch } from "@reduxjs/toolkit";
-import { deletePrenotazione, rimuoviPrenotazione } from "../../../redux/thunks/thunks";
+import { deletePrenotazione, rimuoviPrenotazione, toggleInUfficio } from "../../../redux/thunks/thunks";
 import { screenStyles } from "../../../screens/screenStyles/screenStyles";
 import { prenotaButtonStyles } from "./prenotaButtonStyles";
 import { colors } from "../../../defaultStyles/colors";
@@ -14,6 +14,7 @@ const PrenotaButtonComponent = (props : any) => {
     
     const { pageToNavigate } = props
     const [enabled, setEnabled] = useState(false)
+    const [clickable, setClickable] = useState(false)
 
     const thunkDispatch = useDispatch<ThunkDispatch<IRootState, any,any>>()
 
@@ -21,8 +22,13 @@ const PrenotaButtonComponent = (props : any) => {
     const navigation : NavigationProp<any, any> = useNavigation();
 
     const toggleSwitch = () => {
-        setEnabled(!enabled)
-        thunkDispatch(toggleIsInUfficio())
+        setClickable(false)
+        thunkDispatch(toggleInUfficio()).then(() => {
+            setEnabled(!enabled)
+        })
+        setTimeout(() => {
+                setClickable(true)
+        }, 2000)
     }
 
     return (
@@ -50,6 +56,7 @@ const PrenotaButtonComponent = (props : any) => {
                         thumbColor={!enabled ? colors.orange100 : colors.green100}
                         trackColor={{false: colors.orange40, true: colors.green40} }
                         style={{marginRight: 10}}
+                        disabled={!clickable}
                     />
                     <Text style={[prenotaButtonStyles.buttonText, !enabled ? {color: colors.orange100} : {color: colors.green100}]}>{!enabled ? 'Non sono in ufficio' : 'Sono in ufficio'}</Text>
                 </View>

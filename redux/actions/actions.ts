@@ -81,10 +81,10 @@ export const addPrenotazioneAction = (state: UfficioState, action: PayloadAction
     }
 }
 
-export const setIsPrenotatoAction = (state: UfficioState) => {
+export const setIsPrenotatoAction = (state: UfficioState, action : PayloadAction<boolean>) => {
     return {
         ...state,
-        isPrenotazioneEffettuata: !state.isPrenotazioneEffettuata
+        isPrenotazioneEffettuata: action.payload
     }
 }
 
