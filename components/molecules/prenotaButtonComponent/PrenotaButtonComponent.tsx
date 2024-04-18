@@ -1,5 +1,5 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {Text, TouchableOpacity, View, Switch, Pressable} from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../../redux/store/store";
@@ -13,19 +13,28 @@ import { colors } from "../../../defaultStyles/colors";
 const PrenotaButtonComponent = (props : any) => {
     
     const { pageToNavigate } = props
+    const isPrenotaClicked = useSelector((state: IRootState) => state.peopleReducer.isPrenotazioneEffettuata)
+    const isInUfficio = useSelector((state: IRootState) => state.peopleReducer.prenotazioneList).filter(prenotazione => prenotazione.persona == 5)[0]
+    
     const [enabled, setEnabled] = useState(false)
-    const [clickable, setClickable] = useState(false)
+    const [clickable, setClickable] = useState(true)
+
+    useEffect(() => {
+        // console.log()
+        if(isInUfficio != undefined) {
+            setEnabled(!!isInUfficio.isInOffice)
+        }
+        console.log("enabled" , enabled)
+    }, [isInUfficio])
+
 
     const thunkDispatch = useDispatch<ThunkDispatch<IRootState, any,any>>()
 
-    const isPrenotaClicked = useSelector((state: IRootState) => state.peopleReducer.isPrenotazioneEffettuata)
     const navigation : NavigationProp<any, any> = useNavigation();
 
     const toggleSwitch = () => {
         setClickable(false)
-        thunkDispatch(toggleInUfficio()).then(() => {
-            setEnabled(!enabled)
-        })
+        thunkDispatch(toggleInUfficio())
         setTimeout(() => {
                 setClickable(true)
         }, 2000)
@@ -38,7 +47,6 @@ const PrenotaButtonComponent = (props : any) => {
                 <Pressable
                 style={prenotaButtonStyles.buttonContainer}
                 onPress={(pressed) => {
-                    console.log("pressed")
                     pageToNavigate && navigation.navigate(pageToNavigate)
                 }}>
                     <View style = {[{margin: 0}, prenotaButtonStyles.button]}>

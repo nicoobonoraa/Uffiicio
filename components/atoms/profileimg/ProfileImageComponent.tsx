@@ -10,7 +10,6 @@ const ProfileImageComponent = (props : any) => {
     const {width, height, src, isInOffice, isLeftColumn, person} = props
     const [isOffice, setIsOffice] = useState(isInOffice)
 
-    console.log("person Arrived", person)
 
     useEffect(() => {
         // console.log("aggiornato")

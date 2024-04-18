@@ -33,7 +33,6 @@ const StanzaComponent = (props : any) => {
     const getPersonOnPrenotazioneId = (personId: number) => {
         // console.log(personId)
         const selectedPerson = peopleList.filter(person => person.id == personId)[0]
-        console.log("selected Person: ", selectedPerson)
         return selectedPerson
     }
 

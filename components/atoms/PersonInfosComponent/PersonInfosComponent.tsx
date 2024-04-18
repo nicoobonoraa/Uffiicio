@@ -14,9 +14,6 @@ const PersonInfosComponent = (props : any) => {
     const people = useSelector((state: IRootState) => state.peopleReducer.peopleList)
     const person : Person = people.filter(p => p.id == prenotazione.persona)[0]
 
-    console.log(new Date(prenotazione.oraArrivo).getTime())
-    
-    console.log("person profilePic: ", person.profilePic)
 
     const convertToMoment = (date: Date) => {
         return moment(date)

@@ -76,7 +76,7 @@ export const aggiungiPrenotazione = createAsyncThunk(
                 )
             .then(() => {
                 dispatch(fetchPrenotazioni()).then(
-                    () => dispatch(setIsPrenotato(true))
+                    () => {}
                 )
             })
             .catch((err) => console.error(err))
@@ -92,12 +92,15 @@ interface DeletePrenotazioneBody {
 
 export const rimuoviPrenotazione = createAsyncThunk(
     '/ufficio/rimuoviPrenotazione',
-    async(_, {dispatch, rejectWithValue}) => {
+    async(_, {dispatch, getState, rejectWithValue}) => {
         try {
             axios.delete(BASE_API_URL + PRENOTAZIONI_URL + '/5')
             .then(() => {
                 dispatch(fetchPrenotazioni()).then(
-                    () => dispatch(setIsPrenotato(false))
+                    () => {
+                        dispatch(setIsPrenotato(false))
+                        // const {in} = getState() as UfficioState
+                    }
                 ).catch(err => console.error(err)) 
             }).catch(err => console.error(err)) 
         } catch(err) {
@@ -111,9 +114,7 @@ export const toggleInUfficio = createAsyncThunk(
     async(_, {dispatch, rejectWithValue}) => {
         try {
             axios.put(BASE_API_URL + PRENOTAZIONI_URL + '/5/isInUfficio').then(() => {
-                    dispatch(fetchPrenotazioni()).then(
-                        () => toggleIsInUfficio()
-                    )
+                    dispatch(fetchPrenotazioni())
                 }
             )
         } catch(err) {
